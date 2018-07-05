@@ -5,10 +5,10 @@ import random
 import turicreate as tc
 from all_crosses import ALL_COLUMN_CROSSES_DICT
 from functools import reduce
-from wide_deep_config import COLUMN_NAMES, COLUMN_DTYPES, CATEGORICAL_FEATURES
-from wide_deep_config import CONTINUOUS_FEATURES, WEIGHT_COLUMN, LABEL
-from wide_deep_config import HIDDEN_LAYERS, EMBEDDING_DIMENSIONS, DROPOUT
-from wide_deep_config import TRAIN_PATH, TEST_PATH, WITH_WEIGHT, EPOCHS, VERBOSE
+from config import COLUMN_NAMES, COLUMN_DTYPES, CATEGORICAL_FEATURES
+from config import CONTINUOUS_FEATURES, WEIGHT_COLUMN, LABEL
+from config import HIDDEN_LAYERS, EMBEDDING_DIMENSIONS, DROPOUT
+from config import TRAIN_PATH, TEST_PATH, WITH_WEIGHT, EPOCHS, VERBOSE
 
 tf.logging.set_verbosity(tf.logging.ERROR)
 tf.set_random_seed(10)
