@@ -104,6 +104,11 @@ TRAIN_PATH = '' # What is the path
 
 TEST_PATH = '' # what is the test path
 
+# Warning: 
+# if a model was trained with a random selection of 
+# cross columns, training for a second time will give 
+# an error if the cross columns do not match the last
+# instance of the model
 MODEL_DIR = 'model/'
 
 
