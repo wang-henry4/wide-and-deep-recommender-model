@@ -1,3 +1,4 @@
+##### FEATURE SETTINGS #####
 # names of the columns of the input dataset, in this order
 COLUMN_NAMES = [
     'event_id',
@@ -57,14 +58,23 @@ CONTINUOUS_FEATURES = [
     'second'
 ]
 
-CROSS_COLUMNS = None    # if None 3 random cross columns will be chosen
+# if None 3 random cross columns will be chosen
+CROSS_COLUMNS = None    
 
+# if CROSS_COLUMN choose this many random cross columns
+NUM_RANDOM_CROSSES = 3  
+
+# name of weight column for weighted loss
 WEIGHT_COLUMN = 'weight_column'
 
+# name of label column
 LABEL = 'risk_label' 
 
+
+##### MODEL PARAMETERS ######
 HIDDEN_LAYERS = [256, 128, 64]
 
+# embedding dimesions for each feature in the deep network
 EMBEDDING_DIMENSIONS = {
     'event_id': 10,
     'tenant_id': 10,
@@ -77,16 +87,25 @@ EMBEDDING_DIMENSIONS = {
     'uid': 10
 }
 
+# dropout rate
 DROPOUT = 0
 
+# train with weighted loss
+WITH_WEIGHT = False
+
+# number of epochs to train
+EPOCHS = 1
+
+# Controls verbose printing
+VERBOSE = True
+
+##### FILE PATHS #####
 TRAIN_PATH = '' # What is the path
 
 TEST_PATH = '' # what is the test path
 
-WITH_WEIGHT = False
-
-EPOCHS = 1
-
-VERBOSE = True
-
 MODEL_DIR = 'model/'
+
+
+
+
