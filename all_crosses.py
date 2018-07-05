@@ -1,3 +1,7 @@
+"""
+All the cross feature possibilities for the wide portion of the model, up to 6 feature crosses.
+will add the rest in when I can.
+"""
 ALL_COLUMN_CROSSES_DICT = {
     '2 crosses':[
     ['event_id', 'tenant_id'],
