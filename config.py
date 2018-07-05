@@ -88,3 +88,5 @@ WITH_WEIGHT = False
 EPOCHS = 1
 
 VERBOSE = True
+
+MODEL_DIR = 'model/'
