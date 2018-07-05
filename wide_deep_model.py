@@ -8,7 +8,7 @@ from config import COLUMN_NAMES, COLUMN_DTYPES, CATEGORICAL_FEATURES
 from config import CONTINUOUS_FEATURES, WEIGHT_COLUMN, LABEL
 from config import HIDDEN_LAYERS, EMBEDDING_DIMENSIONS, DROPOUT
 from config import TRAIN_PATH, TEST_PATH, WITH_WEIGHT, EPOCHS, VERBOSE
-from config import CROSS_COLUMN
+from config import CROSS_COLUMN, MODEL_DIR
 
 tf.logging.set_verbosity(tf.logging.ERROR)
 tf.set_random_seed(10)
@@ -161,6 +161,7 @@ def create_model(cross_columns, hidden_units, embedding_dim,
         
 
     model = tf.estimator.DNNLinearCombinedClassifier(
+                model_dir = MODEL_DIR,
                 linear_feature_columns=base_columns + crossed_columns,
                 dnn_feature_columns=deep_columns,
                 weight_column=weight_column,
