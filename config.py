@@ -57,6 +57,8 @@ CONTINUOUS_FEATURES = [
     'second'
 ]
 
+CROSS_COLUMNS = None    # if None 3 random cross columns will be chosen
+
 WEIGHT_COLUMN = 'weight_column'
 
 LABEL = 'risk_label' 
