@@ -3,7 +3,6 @@ import time
 import pprint
 import random
 import turicreate as tc
-from all_crosses import ALL_COLUMN_CROSSES_DICT
 from functools import reduce
 from config import COLUMN_NAMES, COLUMN_DTYPES, CATEGORICAL_FEATURES
 from config import CONTINUOUS_FEATURES, WEIGHT_COLUMN, LABEL
@@ -13,6 +12,56 @@ from config import TRAIN_PATH, TEST_PATH, WITH_WEIGHT, EPOCHS, VERBOSE
 tf.logging.set_verbosity(tf.logging.ERROR)
 tf.set_random_seed(10)
 pp = pprint.PrettyPrinter()
+
+def compute_all_crosses(categoricals):
+    def get_2_combos(features):
+        features = features.copy()
+        result = []
+        for i in range(len(features)):
+            feat = features.pop(0)
+            for f in features:
+                result.append([feat,f])
+        return result
+    
+    def get_more_combos(features, two_features):
+        features = features.copy()
+        result = []
+        feature_set = set(features)
+
+        for combo in two_features:
+            combo_set = set(combo)
+            remain_set = feature_set - combo_set
+
+            for feat in remain_set:
+                temp_combo = combo_set.copy()
+                temp_combo.add(feat)
+                result.append(sorted(list(temp_combo)))
+            
+        return sorted(result, key=lambda x:x[0][0]+x[1][0]+x[2][0])
+
+    def remove_dups(crosses):
+        count = {}
+        crosses_copy = crosses.copy()
+        for cross in crosses:
+            h = [hash(x) for x in cross]
+            h = reduce(lambda x,y: x+y, h)
+            if h not in count:
+                count[h] = True
+            else:
+                crosses_copy.remove(cross)
+        return crosses_copy
+
+    two_feats = get_2_combos(categoricals)
+    results = {'2 crosses': two_feats}
+    
+    for i in range(len(categoricals)-2):
+        next_combo = get_more_combos(categoricals, results[f'{i+2} crosses'])
+        next_combo = remove_dups(next_combo)
+        results[f'{i+3} crosses'] = next_combo
+    
+    return results
+
+ALL_COLUMN_CROSSES_DICT = compute_all_crosses(CATEGORICAL_FEATURES)
 
 ALL_COLUMN_CROSSES = reduce(lambda x,y: x+y, [item for _, item in ALL_COLUMN_CROSSES_DICT.items()])
 
