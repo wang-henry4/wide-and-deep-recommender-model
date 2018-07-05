@@ -8,6 +8,7 @@ from config import COLUMN_NAMES, COLUMN_DTYPES, CATEGORICAL_FEATURES
 from config import CONTINUOUS_FEATURES, WEIGHT_COLUMN, LABEL
 from config import HIDDEN_LAYERS, EMBEDDING_DIMENSIONS, DROPOUT
 from config import TRAIN_PATH, TEST_PATH, WITH_WEIGHT, EPOCHS, VERBOSE
+from config import CROSS_COLUMN
 
 tf.logging.set_verbosity(tf.logging.ERROR)
 tf.set_random_seed(10)
@@ -240,7 +241,8 @@ def run_model(train_path, test_path, column_crosses, hidden_units,
     return evaluation
 
 if __name__ == '__main__':
-    cross_cols = random.sample(ALL_COLUMN_CROSSES, 3)
-    run_model(TRAIN_PATH, TEST_PATH, cross_cols, 
+    if CROSS_COLUMN is None:
+        CROSS_COLUMN = random.sample(ALL_COLUMN_CROSSES, 3)
+    run_model(TRAIN_PATH, TEST_PATH, CROSS_COLUMN, 
             HIDDEN_LAYERS, EMBEDDING_DIMENSIONS, 
             with_weight=WITH_WEIGHT,epochs=EPOCHS, verbose=VERBOSE)
